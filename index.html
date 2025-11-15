@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jamiat Bahawalpur - Islamic Organization Portal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <img src="assets/logo.jpg" alt="Jamiat Logo" class="logo-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="logo-circle" style="display:none;">JB</div>
+                <div class="header-text">
+                    <h1>Jamiat Bahawalpur</h1>
+                    <p>Islamic Organization Portal</p>
+                </div>
+            </div>
+        </header>
+
+        <nav class="tabs-desktop">
+            <button class="tab-btn active" data-tab="messages">Messages</button>
+            <button class="tab-btn" data-tab="programs">Programs</button>
+            <button class="tab-btn" data-tab="attendance">Attendance</button>
+        </nav>
+
+        <main class="main-content">
+            <div id="messages-tab" class="tab-content active">
+                <div class="section-header">
+                    <h2>Messages</h2>
+                    <button class="btn-primary" id="add-message-btn">Add Message</button>
+                </div>
+                <div id="messages-list"></div>
+            </div>
+
+            <div id="programs-tab" class="tab-content">
+                <div class="section-header">
+                    <h2>Programs & Events</h2>
+                    <button class="btn-primary" id="add-program-btn">Add Program</button>
+                </div>
+                <div id="programs-list"></div>
+            </div>
+
+            <div id="attendance-tab" class="tab-content">
+                <div class="section-header">
+                    <h2>Attendance Tracking</h2>
+                    <div class="attendance-actions">
+                        <button class="btn-primary" id="add-member-btn">Add Member</button>
+                        <button class="btn-primary" id="mark-attendance-btn">Mark Attendance</button>
+                    </div>
+                </div>
+                <div id="members-list"></div>
+            </div>
+        </main>
+
+        <nav class="tabs-mobile">
+            <button class="mobile-tab active" data-tab="messages">
+                <span class="icon">💬</span>
+                <span>Messages</span>
+            </button>
+            <button class="mobile-tab" data-tab="programs">
+                <span class="icon">📅</span>
+                <span>Programs</span>
+            </button>
+            <button class="mobile-tab" data-tab="attendance">
+                <span class="icon">👥</span>
+                <span>Attendance</span>
+            </button>
+        </nav>
+    </div>
+
+    <div id="modal-overlay" class="modal-overlay"></div>
+
+    <div id="message-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add Message</h3>
+                <button class="close-btn">&times;</button>
+            </div>
+            <form id="message-form">
+                <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" name="title" required>
+                </div>
+                <div class="form-group">
+                    <label>Content</label>
+                    <textarea name="content" rows="4" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Images (optional)</label>
+                    <input type="file" name="images" multiple accept="image/*">
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary cancel-btn">Cancel</button>
+                    <button type="submit" class="btn-primary">Add Message</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="program-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add Program</h3>
+                <button class="close-btn">&times;</button>
+            </div>
+            <form id="program-form">
+                <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" name="title" required>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea name="description" rows="4" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Date & Time</label>
+                    <input type="datetime-local" name="date" required>
+                </div>
+                <div class="form-group">
+                    <label>Location</label>
+                    <input type="text" name="location" required>
+                </div>
+                <div class="form-group">
+                    <label>Featured Image (optional)</label>
+                    <input type="file" name="featuredImage" accept="image/*">
+                </div>
+                <div class="form-group">
+                    <label>Gallery Images (optional)</label>
+                    <input type="file" name="galleryImages" multiple accept="image/*">
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary cancel-btn">Cancel</button>
+                    <button type="submit" class="btn-primary">Add Program</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="member-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add Member</h3>
+                <button class="close-btn">&times;</button>
+            </div>
+            <form id="member-form">
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label>Phone</label>
+                    <input type="tel" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label>Email (optional)</label>
+                    <input type="email" name="email">
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary cancel-btn">Cancel</button>
+                    <button type="submit" class="btn-primary">Add Member</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="attendance-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Mark Attendance</h3>
+                <button class="close-btn">&times;</button>
+            </div>
+            <form id="attendance-form">
+                <div class="form-group">
+                    <label>Select Program</label>
+                    <select name="program" id="program-select" required>
+                        <option value="">Choose a program...</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Select Members</label>
+                    <div id="members-checklist"></div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary cancel-btn">Cancel</button>
+                    <button type="submit" class="btn-primary">Mark Attendance</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="delete-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Confirm Delete</h3>
+                <button class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p id="delete-message"></p>
+            </div>
+            <div class="form-actions">
+                <button type="button" class="btn-secondary cancel-btn">Cancel</button>
+                <button type="button" class="btn-danger" id="confirm-delete-btn">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="app.js"></script>
+</body>
+</html>
